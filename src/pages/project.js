@@ -3,7 +3,7 @@ import Head from 'next/head';
 import { Canvas } from '@react-three/fiber';
 import { useRouter } from 'next/router';
 
-// A simple back button component (no changes here)
+// A simple back button component
 function BackButton() {
   const router = useRouter();
   return (
@@ -35,23 +35,16 @@ export default function ProjectsPage() {
       </Head>
       <BackButton />
 
-      {/* --- This is the 3D Stage --- */}
+      {/* Basic 3D Scene */}
       <Canvas camera={{ position: [0, 0, 3] }}>
-        
-        {/* We need lights to see objects with realistic materials */}
         <ambientLight intensity={1.5} />
         <directionalLight position={[5, 5, 5]} intensity={5} />
-
-        {/* This is our temporary test object.
-          A <mesh> is a 3D object that needs two things:
-          1. A shape (the <boxGeometry />)
-          2. A surface/skin (the <meshStandardMaterial />)
-        */}
+        
+        {/* Simple test cube */}
         <mesh>
           <boxGeometry args={[1, 1, 1]} />
           <meshStandardMaterial color="hsl(180, 100%, 50%)" />
         </mesh>
-        
       </Canvas>
     </div>
   );

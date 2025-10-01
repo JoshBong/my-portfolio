@@ -5,6 +5,7 @@
   width: 90%;
   max-width: 400px;
   aspect-ratio: 2 / 3; /* Maintains a book-like shape */
+  position: relative;
   
   /* Appearance */
   background-color: white;
@@ -15,7 +16,7 @@
   /* Content Layout (Flexbox) */
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Centers content vertically */
+  justify-content: flex-start; /* Align content to top */
   align-items: center; /* Centers content horizontally */
   
   /* Text and Interactivity */
@@ -24,6 +25,20 @@
   text-align: center;
   cursor: pointer;
   transition: all 0.2s ease-in-out; /* Smooth transition for hover effect */
+}
+
+/* Book title styling */
+.bookTitle {
+  font-size: clamp(1.5rem, 8vw, 3rem);
+  font-weight: 900;
+  text-align: center;
+  margin-top: 2rem;
+  margin-bottom: 10rem;
+  color: #1a202c;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 /* Add a subtle lift effect when the user hovers over the cover */
