@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* This is the new addition. We're ensuring that the foundational
+  elements of your page take up the full available height. This
+  provides a stable container for your main content and backgrounds.
+*/
+html,
+body,
+body > div:first-child,
+div#__next {
+  height: 100%;
+}
+
+.granite {
+  background-image: url('/granite-background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
