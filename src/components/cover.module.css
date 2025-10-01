@@ -1,7 +1,34 @@
+/* This file contains all the styles for our book cover component. */
 
-
-.BookCover {
-  width: 10%;
-  max-width: 600px;
-  aspect-ratio: 2 / 3;
+.bookCover {
+  /* Sizing and Shape */
+  width: 90%;
+  max-width: 400px;
+  aspect-ratio: 2 / 3; /* Maintains a book-like shape */
+  
+  /* Appearance */
+  background-color: white;
+  border-radius: 8px; /* Slightly rounded corners */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); /* Soft shadow for depth */
+  border: 1px solid #e2e8f0; /* Light gray border */
+  
+  /* Content Layout (Flexbox) */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centers content vertically */
+  align-items: center; /* Centers content horizontally */
+  
+  /* Text and Interactivity */
+  color: #1a202c; /* Dark gray text */
+  padding: 2rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out; /* Smooth transition for hover effect */
 }
+
+/* Add a subtle lift effect when the user hovers over the cover */
+.bookCover:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+}
+
