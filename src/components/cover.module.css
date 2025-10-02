@@ -1,49 +1,123 @@
-/* This file contains all the styles for our book cover component. */
+/* Variables for easy customization */
+.bookVariables {
+  --book-width: 440px;
+  --book-height: 600px;
+  --book-thickness: 80px;
+  --spine-width: 50px;
+  --cover-radius: 10px;
+  --rotate-angle: -30deg;
+  --hover-rotate: 0deg;
+  --transition-duration: 1s;
+  --perspective: 400px;
+  --background-color: #194aa4;
+}
 
-.bookCover {
-  /* Sizing and Shape */
-  width: 90%;
-  max-width: 400px;
-  aspect-ratio: 2 / 3; /* Maintains a book-like shape */
-  position: relative;
-  
-  /* Appearance */
-  background-color: white;
-  border-radius: 8px; /* Slightly rounded corners */
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); /* Soft shadow for depth */
-  border: 1px solid #e2e8f0; /* Light gray border */
-  
-  /* Content Layout (Flexbox) */
+.bookContainer {
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start; /* Align content to top */
-  align-items: center; /* Centers content horizontally */
-  
-  /* Text and Interactivity */
-  color: #1a202c; /* Dark gray text */
-  padding: 2rem;
-  text-align: center;
-  cursor: pointer;
-  transition: all 0.2s ease-in-out; /* Smooth transition for hover effect */
+  align-items: center;
+  justify-content: center;
+  perspective: calc(var(--perspective) * 1px);
 }
 
-/* Book title styling */
-.bookTitle {
-  font-size: clamp(1.5rem, 8vw, 3rem);
-  font-weight: 900;
-  text-align: center;
-  margin-top: 2rem;
-  margin-bottom: 10rem;
-  color: #1a202c;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
+@keyframes initAnimation {
+  0% {
+    transform: rotateY(var(--hover-rotate));
+  }
+  100% {
+    transform: rotateY(var(--rotate-angle));
+  }
 }
 
-/* Add a subtle lift effect when the user hovers over the cover */
-.bookCover:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+.book {
+  width: var(--book-width);
+  height: var(--book-height);
+  position: relative;
+  transform-style: preserve-3d;
+  transform: rotateY(var(--rotate-angle));
+  transition: var(--transition-duration) ease;
+  animation: var(--transition-duration) ease 0s 1 initAnimation;
 }
 
+.bookContainer:hover .book, 
+.bookContainer:focus .book {
+  transform: rotateY(var(--hover-rotate));
+}
+
+.book:hover,
+.book:focus {
+  transform: rotateY(var(--hover-rotate));
+}
+
+/* Book */
+.bookCover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--book-width);
+  height: var(--book-height);
+  transform: translateZ(calc(var(--book-thickness) / 2));
+  background-color: var(--background-color);
+  border-radius: var(--cover-radius);
+  box-shadow: 5px 5px 20px #666;
+  overflow: hidden;
+}
+
+/* Cover */
+.coverImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--cover-radius);
+}
+
+ /* Pages */
+.book::before {
+  position: absolute;
+  content: '';
+  left: 0;
+  top: 1px;
+  /* Where pages are located between the spine and the cover */
+  /* ALSO How wide the pages are */
+  /*T These are tied together, not sure how to seperate them atm*/
+  width: calc(var(--book-thickness) - 70px / 2);
+  /* How tall the pages are */
+  height: calc(var(--book-height) - 2px);
+  transform: translateX(calc(var(--book-width) - var(--spine-width) / 2 - 10px)) rotateY(90deg);
+  background: linear-gradient(90deg, 
+    #fff 0%,
+    #f9f9f9 5%,
+    #fff 10%,
+    #f9f9f9 15%,
+    #fff 20%,
+    #f9f9f9 25%,
+    #fff 30%,
+    #f9f9f9 35%,
+    #fff 40%,
+    #f9f9f9 45%,
+    #fff 50%,
+    #f9f9f9 55%,
+    #fff 60%,
+    #f9f9f9 65%,
+    #fff 70%,
+    #f9f9f9 75%,
+    #fff 80%,
+    #f9f9f9 85%,
+    #fff 90%,
+    #f9f9f9 95%,
+    #fff 100%
+    );
+}
+
+/* Back Cover */
+.book::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: '';
+  width: var(--book-width);
+  height: var(--book-height);
+  transform: translateZ(calc(-var(--book-thickness) / 2));
+  background-color: var(--background-color);
+  border-radius: var(--cover-radius);
+  box-shadow: -10px 0 50px 10px #666;
+}
